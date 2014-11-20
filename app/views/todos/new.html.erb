@@ -1,0 +1,14 @@
+<h1>New TODO</h1>
+<% if @todo.errors.any? %>
+	<p>OMG <%= "Error".pluralize(@todo.errors.count) %>!</p>
+	<ul>
+		<% @todo.errors.full_messages.each do |msg| %>
+			<li><%= msg %></li>
+		<% end %>
+	</ul>
+<% end %>
+
+<%= form_for @todo do |form| %>
+	<%= form.text_field :description, placeholder: 'Description' %><br/>
+	<%= form.submit 'Save' %>
+<% end %>
