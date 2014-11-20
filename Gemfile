@@ -51,3 +51,9 @@ group :development, :test do
 	gem 'rspec-rails'
 	gem 'capybara'
 end
+
+group :test do
+	gem 'email_spec'
+end
+
+gem 'devise', '~> 3.4.1'

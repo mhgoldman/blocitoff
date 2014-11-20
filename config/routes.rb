@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  root 'application#hello'
+  devise_for :users
+  root 'welcome#index'
   resources :todos, only: [:new, :create, :show]
 
   # The priority is based upon order of creation: first created -> highest priority.
