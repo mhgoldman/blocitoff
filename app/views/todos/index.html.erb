@@ -2,13 +2,13 @@
 <table>
 	<tr>
 		<th>Description</th>
-		<th>Created at</th>
+		<th>Days left</th>
 	</tr>
 	<% if @todos.any? %>
 		<% @todos.each do |todo| %>
 		<tr>
 			<td><%= link_to todo.description, todo %></td>
-			<td><%= todo.created_at %></td>
+			<td><%= todo.days_left %></td>
 		</tr>
 		<% end %>
 	<% else %>
