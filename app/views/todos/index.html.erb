@@ -1,0 +1,13 @@
+<h2>TODOs</h2>
+<table>
+	<tr>
+		<th>Description</th>
+		<th>Created at</th>
+	</tr>
+	<% @todos.each do |todo| %>
+	<tr>
+		<td><%= link_to todo.description, todo %></td>
+		<td><%= todo.created_at %></td>
+	</tr>
+	<% end %>
+</table>
