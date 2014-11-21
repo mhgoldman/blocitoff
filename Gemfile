@@ -58,4 +58,6 @@ gem 'devise', '~> 3.4.1'
 
 gem 'figaro', '1.0'
 
-gem 'whenever', group: :development
+gem 'whenever', group: :development, require: false
+
+gem 'shoulda-matchers', group: :test, require: false
