@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Project manager creates TODO' do
+feature 'Project manager completes TODO' do
 	before do
 		u = User.new(email: 'me@mgoldman.com', password: 'somepa$$word1', password_confirmation: 'somepa$$word1')
 		u.skip_confirmation!
@@ -17,13 +17,8 @@ feature 'Project manager creates TODO' do
 		click_button 'Log in'
 		expect(page).to have_content('Signed in successfully')		
 
-		visit new_todo_path
-		fill_in 'Description', with: 'Meet up with the team'
-		click_button 'Save'
-		expect(page).to have_content('Your new TODO was saved')
-		expect(page).to have_content('Meet up with the team')
-
-		click_button 'Delete'
+		visit todos_path
+		click_link 'complete'
 		expect(page).to have_content('Your TODO was deleted')
 	end
 end
