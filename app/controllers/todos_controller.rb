@@ -6,7 +6,7 @@ class TodosController < ApplicationController
 	end
 
 	def create
-		@todo = Todo.new(todo_params)
+		@todo = Todo.new(todo_params.merge(user: current_user))
 		if @todo.save
 			redirect_to @todo, notice: 'Your new TODO was saved'
 		else
@@ -15,11 +15,11 @@ class TodosController < ApplicationController
 	end
 
 	def show
-		@todo = Todo.find(params[:id])
+		@todo = current_user.todos.find(params[:id])
 	end
 
 	def index
-		@todos = Todo.all
+		@todos = current_user.todos
 	end
 	
 	private

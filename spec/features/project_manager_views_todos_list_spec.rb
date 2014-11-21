@@ -7,9 +7,9 @@ feature 'Project manager views TODO' do
 		u.save
 
 		Todo.delete_all
-		Todo.create(description: 'do a thing')
-		Todo.create(description: 'do another thing')
-		Todo.create(description: 'do a third thing')
+		Todo.create(description: 'do a thing', user: u)
+		Todo.create(description: 'do another thing', user: u)
+		Todo.create(description: 'do a third thing', user: u)
 	end
 
 	scenario 'Successfully' do

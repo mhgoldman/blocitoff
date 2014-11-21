@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 feature 'Project manager creates TODO' do
-	#TODO... should the duplicate code  go into a before block? because that totally doesn't work.
 	before do
 		u = User.new(email: 'me@mgoldman.com', password: 'somepa$$word1', password_confirmation: 'somepa$$word1')
 		u.skip_confirmation!
