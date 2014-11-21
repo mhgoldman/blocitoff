@@ -3,6 +3,7 @@ require 'rails_helper'
 feature 'User registration' do
 
 	before do
+		User.delete_all
 		ActionMailer::Base.deliveries.clear
 	end
 

@@ -1,0 +1,11 @@
+<ul>
+	<li><%= link_to 'home', root_path %></li>
+	<% if user_signed_in? %>
+		<li><%= link_to 'my TODOs', todos_path %></li>
+		<li><%= link_to 'add TODO', new_todo_path %></li>
+		<li><%= link_to("log out #{current_user.email}", destroy_user_session_path, method: :delete) %></li>
+	<% else %>
+		<li><%= link_to('log in', new_user_session_path) %></li>
+		<li><%= link_to('sign up', new_user_registration_path) %></li>		
+	<% end %>
+</ul>
