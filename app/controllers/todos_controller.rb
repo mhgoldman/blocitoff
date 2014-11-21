@@ -18,6 +18,12 @@ class TodosController < ApplicationController
 		@todo = current_user.todos.find(params[:id])
 	end
 
+	def destroy
+		@todo = current_user.todos.find(params[:id])
+		@todo.destroy
+		redirect_to todos_path, notice: 'Your TODO was deleted'
+	end
+
 	def index
 		@todos = current_user.todos
 	end

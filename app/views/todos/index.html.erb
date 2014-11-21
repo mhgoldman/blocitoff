@@ -3,12 +3,14 @@
 	<tr>
 		<th>Description</th>
 		<th>Days left</th>
+		<th>Complete</th>
 	</tr>
 	<% if @todos.any? %>
 		<% @todos.each do |todo| %>
 		<tr>
 			<td><%= link_to todo.description, todo %></td>
 			<td><%= todo.days_left %></td>
+			<td><%= link_to 'complete', todo_path(todo), method: :delete %></td>
 		</tr>
 		<% end %>
 	<% else %>
