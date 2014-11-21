@@ -52,10 +52,10 @@ group :development, :test do
 	gem 'capybara'
 end
 
-group :test do
-	gem 'email_spec'
-end
+gem 'email_spec', group: :test
 
 gem 'devise', '~> 3.4.1'
 
 gem 'figaro', '1.0'
+
+gem 'whenever', group: :development
