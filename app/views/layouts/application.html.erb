@@ -7,10 +7,11 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<h1>Blocitoff</h1>
-<%= flash[:notice] if flash[:notice]%>
-<%= flash[:alert] if flash[:alert]%>
-<%= yield %>
-<%= render 'shared/nav' %>
+<div class="container">
+	<%= render 'shared/nav' %>
+	<%= render 'shared/flashes' %>
+	<%= yield %>
+
+</div>
 </body>
 </html>

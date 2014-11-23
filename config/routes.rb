@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users
+
   root 'welcome#index'
+
+  get 'welcome/about'
+
   resources :todos
 
   # The priority is based upon order of creation: first created -> highest priority.

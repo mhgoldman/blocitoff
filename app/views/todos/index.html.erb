@@ -1,11 +1,13 @@
 <h2>My TODOs</h2>
 <% if @todos.any? %>
-<table>
-	<tr>
-		<th>Description</th>
-		<th>Days left</th>
-		<th>Complete</th>
-	</tr>
+<table class="table">
+	<thead>
+		<tr>
+			<th>Description</th>
+			<th>Days left</th>
+			<th>Complete</th>
+		</tr>
+	</thead>
 		<% @todos.each do |todo| %>
 		<tr>
 			<td><%= todo.description %></td>
