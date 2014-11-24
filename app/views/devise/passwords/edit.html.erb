@@ -1,7 +1,5 @@
 <h2>Change Password</h2>
-<% if resource.errors.any? %>
-  <div class='alert alert-danger'>Your changes could not be saved due to <%= resource.errors.count.to_s + " error".pluralize(resource.errors.count) %>.</div>
-<% end %>
+<%= render 'shared/errors', obj: resource %>
 
 <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
   <%= f.hidden_field :reset_password_token %>

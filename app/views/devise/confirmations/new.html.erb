@@ -1,10 +1,7 @@
 <h2>Resend Confirmation Email</h2>
-<% if resource.errors.any? %>
-  <div class='alert alert-danger'>Your request could not be completed due to <%= resource.errors.count.to_s + " error".pluralize(resource.errors.count) %>.</div>
-<% end %>
+<%= render 'shared/errors', obj: resource %>
 
 <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
-
   <div class="field form-group">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true %>

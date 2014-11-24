@@ -1,21 +1,21 @@
 <h2>My TODOs</h2>
 <% if @todos.any? %>
-<table class="table">
-	<thead>
-		<tr>
-			<th>Description</th>
-			<th>Days left</th>
-			<th>Complete</th>
-		</tr>
-	</thead>
-		<% @todos.each do |todo| %>
-		<tr>
-			<td><%= todo.description %></td>
-			<td><%= todo.days_left %></td>
-			<td><%= link_to 'complete', todo_path(todo), method: :delete %></td>
-		</tr>
-		<% end %>
-</table>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Description</th>
+				<th>Days left</th>
+				<th>Complete</th>
+			</tr>
+		</thead>
+			<% @todos.each do |todo| %>
+			<tr>
+				<td><%= todo.description %></td>
+				<td><%= todo.days_left %></td>
+				<td><%= link_to 'complete', todo_path(todo), method: :delete %></td>
+			</tr>
+			<% end %>
+	</table>
 <% else %>
 		<p>There are no TODOs.</p>
 <% end %>
