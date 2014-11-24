@@ -1,1 +1,14 @@
- @import "bootstrap";
+@import "bootstrap";
+
+.form-field-error {
+	  color: #a94442;	
+	  display: inline;
+}
+
+.alert {
+	margin-top: 10px;
+}
+
+.nav-tabs	 {
+	margin-top: 10px;
+}

@@ -1,21 +1,23 @@
-<h2>Change your password</h2>
+<h2>Change Password</h2>
+<% if resource.errors.any? %>
+  <div class='alert alert-danger'>Your changes could not be saved due to <%= resource.errors.count.to_s + " error".pluralize(resource.errors.count) %>.</div>
+<% end %>
 
 <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
   <%= f.hidden_field :reset_password_token %>
 
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :password, "New password" %><br />
     <%= f.password_field :password, autofocus: true, autocomplete: "off" %>
   </div>
 
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :password_confirmation, "Confirm new password" %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Change my password" %>
+  <div class="actions form-group">
+    <%= f.submit "Change Password", class: "btn btn-default" %>
   </div>
 <% end %>
 

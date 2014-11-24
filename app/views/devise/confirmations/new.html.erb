@@ -1,15 +1,17 @@
-<h2>Resend confirmation instructions</h2>
+<h2>Resend Confirmation Email</h2>
+<% if resource.errors.any? %>
+  <div class='alert alert-danger'>Your request could not be completed due to <%= resource.errors.count.to_s + " error".pluralize(resource.errors.count) %>.</div>
+<% end %>
 
 <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
-  <%= devise_error_messages! %>
 
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true %>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Resend confirmation instructions" %>
+  <div class="actions form-group">
+    <%= f.submit "Resend Email", class: "btn btn-default" %>
   </div>
 <% end %>
 
