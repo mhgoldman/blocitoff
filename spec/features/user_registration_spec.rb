@@ -11,7 +11,7 @@ feature 'User registration' do
 		fill_in 'Email', with: 'me@mgoldman.com'
 		fill_in 'Password', with: 'somepa$$word1'
 		fill_in 'Password confirmation', with: 'somepa$$word1'
-		click_button 'Sign up'
+		click_button 'Sign Up'
 		expect(page).to have_content('A message with a confirmation link has been sent to your email address')
 		
 		open_email('me@mgoldman.com')
@@ -21,7 +21,7 @@ feature 'User registration' do
 		visit new_user_session_path
 		fill_in 'Email', with: 'me@mgoldman.com'
 		fill_in 'Password', with: 'somepa$$word1'
-		click_button 'Log in'
+		click_button 'Log In'
 		expect(page).to have_content('Signed in successfully')		
 	end
 end

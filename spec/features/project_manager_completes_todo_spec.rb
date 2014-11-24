@@ -14,7 +14,7 @@ feature 'Project manager completes TODO' do
 		visit new_user_session_path
 		fill_in 'Email', with: 'me@mgoldman.com'
 		fill_in 'Password', with: 'somepa$$word1'
-		click_button 'Log in'
+		click_button 'Log In'
 		expect(page).to have_content('Signed in successfully')		
 
 		visit todos_path

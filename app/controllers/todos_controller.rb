@@ -6,7 +6,7 @@ class TodosController < ApplicationController
 	end
 
 	def create
-		@todo = Todo.new(todo_params.merge(user: current_user))
+		@todo = current_user.todos.new(todo_params)
 		if @todo.save
 			redirect_to todos_path, notice: 'Your new TODO was saved'
 		else
