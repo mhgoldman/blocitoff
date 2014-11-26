@@ -4,7 +4,7 @@
 <%= form_for @todo do |form| %>
 <div class="form-group">
 	<%= form.label :description %><br/>
-	<%= form.text_field :description, placeholder: 'Description' %><br/>
+	<%= form.text_field :description, placeholder: 'Description', autofocus: true %><br/>
 </div>
 	<%= form.submit 'Save', class: "btn btn-default" %>
 <% end %>

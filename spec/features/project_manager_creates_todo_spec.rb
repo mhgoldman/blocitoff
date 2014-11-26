@@ -1,18 +1,15 @@
 require 'rails_helper'
 
+include Warden::Test::Helpers
+Warden.test_mode!
+
 feature 'Project manager creates TODO' do
 	before do
-		u = User.new(email: 'me@mgoldman.com', password: 'somepa$$word1', password_confirmation: 'somepa$$word1')
-		u.skip_confirmation!
-		u.save
+		@user = create(:user)
 	end
 
 	scenario 'Successfully' do
-		visit new_user_session_path
-		fill_in 'Email', with: 'me@mgoldman.com'
-		fill_in 'Password', with: 'somepa$$word1'
-		click_button 'Log In'
-		expect(page).to have_content('Signed in successfully')		
+		login_as(@user, scope: :user)
 
 		visit new_todo_path
 		fill_in 'Description', with: 'Meet up with the team'
@@ -22,11 +19,7 @@ feature 'Project manager creates TODO' do
 	end
 
 	scenario 'With description missing' do
-		visit new_user_session_path
-		fill_in 'Email', with: 'me@mgoldman.com'
-		fill_in 'Password', with: 'somepa$$word1'
-		click_button 'Log In'
-		expect(page).to have_content('Signed in successfully')		
+		login_as(@user, scope: :user)
 
 		visit new_todo_path
 		click_button 'Save'

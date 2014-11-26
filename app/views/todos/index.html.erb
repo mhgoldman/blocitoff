@@ -12,7 +12,7 @@
 			<tr>
 				<td><%= todo.description %></td>
 				<td><%= todo.days_left %></td>
-				<td><%= link_to 'complete', todo_path(todo), method: :delete %></td>
+				<td><%= link_to 'complete', todo_path(todo), data: {confirm: 'Are you sure?'}, method: :delete %></td>
 			</tr>
 			<% end %>
 	</table>

@@ -52,7 +52,11 @@ group :development, :test do
 	gem 'capybara'
 end
 
-gem 'email_spec', group: :test
+group :test do
+	gem 'email_spec'
+	gem 'database_cleaner'
+	gem 'factory_girl_rails', '~> 4.0'
+end
 
 gem 'devise', '~> 3.4.1'
 
