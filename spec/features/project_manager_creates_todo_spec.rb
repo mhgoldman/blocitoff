@@ -1,11 +1,15 @@
 require 'rails_helper'
 
 include Warden::Test::Helpers
-Warden.test_mode!
 
 feature 'Project manager creates TODO' do
 	before do
 		@user = create(:user)
+		Warden.test_mode!
+	end
+
+	after do
+		Warden.test_reset! 
 	end
 
 	scenario 'Successfully' do
