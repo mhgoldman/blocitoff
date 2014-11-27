@@ -1,8 +1,10 @@
 blank_todo = function() { $('#todos-div').html("<%= escape_javascript(render 'blank_todo_list') %>"); }
 
 <% if @todo.destroyed? %>
-	<% current_user.todos.reload %>
+	<% current_user.todos.reload # needed so the any? below will work %>
 	$('#todo-<%= @todo.id %>').fadeOut(400, <%= current_user.todos.any? ? 'null' : 'blank_todo' %>);
 <% end %>
 
-<%= render 'update_page_state.js.erb', errors_todo: @todo, form_todo: @new_todo %>
+$('#todo-form').html("<%= escape_javascript(render 'form', todo: @new_todo) %>");
+
+<%= render 'toasts' %>

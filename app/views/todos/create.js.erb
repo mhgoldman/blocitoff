@@ -1,8 +1,3 @@
-<%
-form_todo = @todo.new_record? ? @todo : @new_todo
-errors_todo = @todo 
-%>
-
 <% unless @todo.new_record? %>
 	if ($('#todos-table').length) 
 	{
@@ -14,4 +9,7 @@ errors_todo = @todo
 	}
 <% end %>
 
-<%= render 'update_page_state.js.erb', errors_todo: errors_todo, form_todo: form_todo %>
+$('#todo-form').html("<%= escape_javascript(render 'form', todo: (@todo.new_record? ? @todo : @new_todo)) %>");
+$('#new-todo-description').focus();
+
+<%= render 'toasts' %>

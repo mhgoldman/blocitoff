@@ -27,7 +27,7 @@ feature 'Project manager creates TODO' do
 
 		visit todos_path
 		click_button 'Save'
-		expect(page).to have_content("Description can't be blank")
+		expect(page).to have_content("can't be blank")
 	end
 
 	scenario 'Without being logged in' do

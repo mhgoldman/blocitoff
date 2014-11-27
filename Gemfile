@@ -67,3 +67,5 @@ gem 'whenever', group: :development, require: false
 gem 'shoulda-matchers', group: :test, require: false
 
 gem 'bootstrap-sass', '~> 3.1.1'
+
+gem 'toastr-rails'
