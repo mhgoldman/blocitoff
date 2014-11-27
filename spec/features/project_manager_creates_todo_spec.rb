@@ -4,8 +4,8 @@ include Warden::Test::Helpers
 
 feature 'Project manager creates TODO' do
 	before do
-		@user = create(:user)
 		Warden.test_mode!
+		@user = create(:user)
 	end
 
 	after do

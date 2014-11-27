@@ -2,20 +2,17 @@ require 'rails_helper'
 
 feature 'Project manager completes TODO' do
 	before do
-		u = User.new(email: 'me@mgoldman.com', password: 'somepa$$word1', password_confirmation: 'somepa$$word1')
-		u.skip_confirmation!
-		u.save
+		Warden.test_mode!
+		@user = create(:user)
+		@todos = create(:todo, user: @user)
+	end
 
-		Todo.delete_all
-		Todo.create(description: 'do a thing', user: u)
+	after do
+		Warden.test_reset! 
 	end
 
 	scenario 'Successfully' do
-		visit new_user_session_path
-		fill_in 'Email', with: 'me@mgoldman.com'
-		fill_in 'Password', with: 'somepa$$word1'
-		click_button 'Log In'
-		expect(page).to have_content('Signed in successfully')		
+		login_as(@user)
 
 		visit todos_path
 		click_button 'complete'
