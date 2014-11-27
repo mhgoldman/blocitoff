@@ -1,0 +1,14 @@
+<table class="table" id="todos-table">
+			<thead>
+				<tr>
+					<th>Description</th>
+					<th>Days left</th>
+					<th>Complete</th>
+				</tr>
+			</thead>
+			<% @todos.each do |todo| %>
+				<% unless todo.new_record? %>
+					<%= render 'todo_list_row', todo: todo %>
+				<% end %>
+			<% end %>
+</table>

@@ -4,3 +4,9 @@
 <% if flash[:alert] %>
 	<div class="alert alert-danger"><%= flash[:alert]%></div>
 <% end %>
+
+<% 
+# Workaround for the flash sticking around for an extra pageview after it gets rendered in an AJAX request.
+flash.discard(:notice)
+flash.discard(:alert) 
+%>

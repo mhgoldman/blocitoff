@@ -1,21 +1,14 @@
 <h2>My TODOs</h2>
+<div id="errors-div">
+<%= render 'shared/errors', obj: @todo %>		
+</div>
+<div id="todos-div">
 <% if @todos.any? %>
-	<table class="table">
-		<thead>
-			<tr>
-				<th>Description</th>
-				<th>Days left</th>
-				<th>Complete</th>
-			</tr>
-		</thead>
-			<% @todos.each do |todo| %>
-			<tr>
-				<td><%= todo.description %></td>
-				<td><%= todo.days_left %></td>
-				<td><%= link_to 'complete', todo_path(todo), data: {confirm: 'Are you sure?'}, method: :delete %></td>
-			</tr>
-			<% end %>
-	</table>
+		<%= render 'todo_list' %>
 <% else %>
-		<p>There are no TODOs.</p>
+		<%= render 'blank_todo_list' %>
 <% end %>
+</div>
+<div id="todo-form">
+	<%= render 'form', todo: @todo %>
+</div>

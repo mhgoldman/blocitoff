@@ -18,7 +18,7 @@ feature 'Project manager completes TODO' do
 		expect(page).to have_content('Signed in successfully')		
 
 		visit todos_path
-		click_link 'complete'
+		click_button 'complete'
 		expect(page).to have_content('Your TODO was deleted')
 	end
 end

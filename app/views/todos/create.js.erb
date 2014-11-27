@@ -1,0 +1,17 @@
+<%
+form_todo = @todo.new_record? ? @todo : @new_todo
+errors_todo = @todo 
+%>
+
+<% unless @todo.new_record? %>
+	if ($('#todos-table').length) 
+	{
+		$('#todos-table tr:last').after("<%= escape_javascript(render 'todo_list_row', todo: @todo) %>");		
+	}
+	else
+	{
+		$('#todos-div').html("<%= escape_javascript(render 'todo_list') %>");
+	}
+<% end %>
+
+<%= render 'update_page_state.js.erb', errors_todo: errors_todo, form_todo: form_todo %>

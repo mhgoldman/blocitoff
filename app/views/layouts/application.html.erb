@@ -9,7 +9,10 @@
 <body>
 <div class="container">
 	<%= render 'shared/nav' %>
-	<%= render 'shared/flashes' %>
+	<div id="flashes">
+		<%= render 'shared/flashes' %>
+	</div>
+	
 	<%= yield %>
 
 </div>

@@ -1,0 +1,4 @@
+$('#todo-form').html("<%= escape_javascript(render 'form', todo: form_todo) %>");
+$('#flashes').html("<%= escape_javascript(render 'shared/flashes') %>");
+$('#errors-div').html("<%= escape_javascript(render 'shared/errors', obj: errors_todo) %>");
+$('#new-todo-description').focus();
