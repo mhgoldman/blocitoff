@@ -6,9 +6,5 @@
 					<th></th>
 				</tr>
 			</thead>
-			<% @todos.each do |todo| %>
-				<% unless todo.new_record? %>
-					<%= render 'todo_list_row', todo: todo %>
-				<% end %>
-			<% end %>
+			<%= render @todos %>
 </table>

@@ -1,0 +1,7 @@
+<% unless todo.new_record? %>
+	<tr id="todo-<%= todo.id %>">
+		<td><%= todo.description %></td>
+		<td><%= todo.days_left %></td>
+		<td><%= button_to 'complete', todo_path(todo), class: 'delete_link', method: :delete, remote: true %></td>
+	</tr>
+<% end %>

@@ -1,7 +1,7 @@
 <% unless @todo.new_record? %>
 	if ($('#todos-table').length) 
 	{
-		$('#todos-table tr:last').after("<%= escape_javascript(render 'todo_list_row', todo: @todo) %>");		
+		$('#todos-table tr:last').after("<%= escape_javascript(render @todo) %>");		
 	}
 	else
 	{
