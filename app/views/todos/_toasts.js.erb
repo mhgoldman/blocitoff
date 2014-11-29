@@ -1,11 +1,11 @@
 <% if flash[:notice] %>
-toastr.info("<%= escape_javascript(flash[:notice]) %>");
+	toastr.info("<%= escape_javascript(flash[:notice]) %>");
 <% end %>
 <% if flash[:alert] %>
-toastr.error("<%= escape_javascript(flash[:alert]) %>");
+	toastr.error("<%= escape_javascript(flash[:alert]) %>");
 <% end %>
 <% if @todo.errors.any? %>
-toastr.error("Your changes could not be saved due to <%= escape_javascript(@todo.errors.count.to_s + ' error'.pluralize(@todo.errors.count)) %>");
+	toastr.error("Your changes could not be saved due to <%= escape_javascript(@todo.errors.count.to_s + ' error'.pluralize(@todo.errors.count)) %>");
 <% end %>
 
 <% flash.discard %>
