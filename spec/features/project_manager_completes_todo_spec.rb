@@ -15,6 +15,7 @@ feature 'Project manager completes TODO' do
 		login_as(@user)
 
 		visit todos_path
+		check 'completed'
 		click_button 'complete'
 		expect(page).to have_content('Your TODO was deleted')
 	end

@@ -7,9 +7,13 @@
 	{
 		$('#todos-div').html("<%= escape_javascript(render 'todo_list') %>");
 	}
+
+	$('#todo-<%= @todo.id %> .complete-task-form').submitOnCheck();
 <% end %>
 
+
 $('#todo-form').html("<%= escape_javascript(render 'form', todo: (@todo.new_record? ? @todo : @new_todo)) %>");
+
 $('#new-todo-description').focus();
 
 <%= render 'toasts' %>

@@ -24,6 +24,10 @@ class TodosController < ApplicationController
 	end
 
 	def destroy
+		unless params[:completed] == "1"
+			redirect_to todos_path and return
+		end
+
 		@todo = current_user.todos.find(params[:id])
 		@todo.destroy
 		
@@ -42,6 +46,6 @@ class TodosController < ApplicationController
 	private
 
 	def todo_params
-		params.require(:todo).permit(:description)
+		params.require(:todo).permit(:description, :completed)
 	end
 end

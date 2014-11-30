@@ -1,3 +1,5 @@
+toastr.options.positionClass = "toast-bottom-right";
+
 <% if flash[:notice] %>
 	toastr.info("<%= escape_javascript(flash[:notice]) %>");
 <% end %>
