@@ -4,8 +4,10 @@ jQuery.fn.submitOnCheck = function() {
 	});
 
 	this.find('input[type=submit]').hide();
+
+	return this;
 }
 
-$(function() {
+$(document).on("page:change", function() {
 	$('.complete-task-form').submitOnCheck();
 });

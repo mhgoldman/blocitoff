@@ -69,3 +69,5 @@ gem 'shoulda-matchers', group: :test, require: false
 gem 'bootstrap-sass', '~> 3.1.1'
 
 gem 'toastr-rails'
+
+gem 'jquery-turbolinks'
