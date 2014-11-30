@@ -53,6 +53,10 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
 
    # Make Factory Girl's methods avilable
-   config.include FactoryGirl::Syntax::Methods
+  config.include FactoryGirl::Syntax::Methods
 
+  # Make Devise's test helpers available
+  RSpec.configure do |config|
+    config.include Devise::TestHelpers, type: :controller
+  end
 end
