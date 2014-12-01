@@ -40,7 +40,7 @@ class TodosController < ApplicationController
 
 	def index
 		@todo = @list.todos.new
-		@todos = @list.todos.reload #needed because...?
+		@todos = @list.todos
 	end
 	
 	private
