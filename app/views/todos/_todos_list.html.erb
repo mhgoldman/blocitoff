@@ -6,5 +6,5 @@
 					<th></th>
 				</tr>
 			</thead>
-			<%= render @todos %>
+			<%= render collection: @list.todos, partial: 'todos_list_row', as: :todo %>
 </table>

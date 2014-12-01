@@ -1,11 +1,11 @@
 <% unless @todo.new_record? %>
 	if ($('#todos-table').length) 
 	{
-		$('#todos-table tr:last').after("<%= escape_javascript(render @todo) %>");		
+		$('#todos-table tr:last').after("<%= escape_javascript(render 'todos_list_row', todo: @todo) %>");		
 	}
 	else
 	{
-		$('#todos-div').html("<%= escape_javascript(render 'todo_list') %>");
+		$('#todos-div').html("<%= escape_javascript(render 'todos_list') %>");
 	}
 
 	$('#todo-<%= @todo.id %> .complete-task-form').submitOnCheck();
@@ -16,4 +16,4 @@ $('#todo-form').html("<%= escape_javascript(render 'form', todo: (@todo.new_reco
 
 $('#new-todo-description').focus();
 
-<%= render 'toasts' %>
+<%= render 'shared/toasts', obj: @todo %>

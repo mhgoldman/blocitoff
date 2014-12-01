@@ -2,7 +2,7 @@
 	<%= nav_link 'Blocitoff', root_path, a_class: 'navbar-brand' %>
 	
 	<% if user_signed_in? %>
-		<li><%= nav_link 'My TODOs', todos_path %></li>
+		<li><%= nav_link 'My Lists', lists_path %></li>
 	<% end %>
 
 	<%= nav_link 'About', welcome_about_path %>

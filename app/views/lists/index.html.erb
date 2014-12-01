@@ -1,0 +1,14 @@
+<h2>My Lists</h2>
+<div id="errors-div">
+<%= render 'shared/errors', obj: @list %>		
+</div>
+<div id="lists-div">
+<% if @lists.any? %>
+		<%= render 'lists_list' %>
+<% else %>
+		<%= render 'blank_lists_list' %>
+<% end %>
+</div>
+<div id="list-form">
+	<%= render 'form', list: @list %>
+</div>

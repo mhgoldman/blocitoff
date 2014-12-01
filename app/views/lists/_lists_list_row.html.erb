@@ -1,0 +1,9 @@
+<% unless list.new_record? %>
+		<tr class='list-list-row' id='list-<%= list.id %>'>
+			<td><%= link_to list.name, list_todos_path(list) %></td>
+			<td><%= list.permissions %></td>
+			<td>
+				<%= button_to('destroy', list, method: :delete, authenticity_token: true, remote: true) %>
+			</td>
+		</tr>
+<% end %>

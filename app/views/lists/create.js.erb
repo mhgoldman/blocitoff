@@ -1,0 +1,17 @@
+<% unless @list.new_record? %>
+	if ($('#lists-table').length) 
+	{
+		$('#lists-table tr:last').after("<%= escape_javascript(render 'lists_list_row', list: @list) %>");		
+	}
+	else
+	{
+		$('#lists-div').html("<%= escape_javascript(render 'lists_list') %>");
+	}
+<% end %>
+
+
+$('#list-form').html("<%= escape_javascript(render 'form', list: (@list.new_record? ? @list : @new_list)) %>");
+
+$('#new-list-name').focus();
+
+<%= render 'shared/toasts', obj: @list %>
