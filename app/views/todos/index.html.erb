@@ -3,7 +3,7 @@
 <%= render 'shared/errors', obj: @todo %>		
 </div>
 <div id="todos-div">
-<% if @list.todos.any? %>
+<% if @list.todos.reload.any? %>
 		<%= render 'todos_list' %>
 <% else %>
 		<%= render 'blank_todos_list' %>
