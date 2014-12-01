@@ -1,13 +1,11 @@
 toastr.options.positionClass = "toast-bottom-right";
 
 <% if flash[:notice] %>
-	toastr.info("<%= escape_javascript(flash[:notice]) %>");
+	toastr.info("<%= escape_javascript(flash.discard[:notice]) %>");
 <% end %>
 <% if flash[:alert] %>
-	toastr.error("<%= escape_javascript(flash[:alert]) %>");
+	toastr.error("<%= escape_javascript(flash.discard[:alert]) %>");
 <% end %>
 <% if obj.errors.any? %>
 	toastr.error("Your changes could not be saved due to <%= escape_javascript(obj.errors.count.to_s + ' error'.pluralize(obj.errors.count)) %>");
 <% end %>
-
-<% flash.discard %>
