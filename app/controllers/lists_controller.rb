@@ -8,7 +8,7 @@ class ListsController < ApplicationController
 
 	def create
 		@list = current_user.lists.new(list_params)
-		@lists = current_user.lists #needed to render index (html) or to render the todo list if there were previously zero items (js)
+		@lists = current_user.lists #needed to render index (html)
 
 		if @list.save
 			@new_list = current_user.lists.new
@@ -26,9 +26,7 @@ class ListsController < ApplicationController
 	def destroy
 		@list = current_user.lists.find(params[:id])
 		@list.destroy
-		
-		@lists = current_user.lists
-		
+				
 		@new_list = current_user.lists.new
 		flash[:notice] = 'Your list was deleted'
 		respond_with(@list) do |format|

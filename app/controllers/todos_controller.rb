@@ -8,7 +8,7 @@ class TodosController < ApplicationController
 
 	def create
 		@todo = @list.todos.new(todo_params)
-		@todos = @list.todos #needed to render index (html) or to render the todo list if there were previously zero items (js)
+		@todos = @list.todos #needed to render index (html)
 
 		if @todo.save
 			@new_todo = @list.todos.new
