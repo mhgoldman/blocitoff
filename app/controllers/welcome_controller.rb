@@ -1,5 +1,5 @@
 class WelcomeController < ApplicationController
-	before_filter :redirect_to_todos_page, only: :index
+	before_filter :redirect_to_lists_page, only: :index
 	def index
 	end
 
@@ -8,7 +8,7 @@ class WelcomeController < ApplicationController
 
 	private
 
-	def redirect_to_todos_page
-		redirect_to todos_path if user_signed_in?
+	def redirect_to_lists_page
+		redirect_to lists_path if user_signed_in?
 	end
 end

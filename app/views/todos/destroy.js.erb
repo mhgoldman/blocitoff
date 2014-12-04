@@ -1,10 +1,16 @@
-blank_todo = function() { $('#todos-div').html("<%= escape_javascript(render 'blank_todo_list') %>"); }
+remove_todo = function(row_id) { 
+	$(row_id).remove();
+
+	if ($('#todos_table .todo-list-row').length === 0)
+	{
+		$('#no_todos_msg').show();
+		$('#todos_table').hide();
+	}
+}
 
 <% if @todo.destroyed? %>
-	<% current_user.todos.reload # needed so the any? below will work %>
-	$('#todo-<%= @todo.id %>').fadeOut(400, <%= current_user.todos.any? ? 'null' : 'blank_todo' %>);
+  row_id = '#todo_<%= @todo.id %>';
+	$(row_id).fadeOut(400, remove_todo(row_id));
 <% end %>
 
-$('#todo-form').html("<%= escape_javascript(render 'form', todo: @new_todo) %>");
-
-<%= render 'toasts' %>
+<%= render 'shared/toasts', obj: @todo %>

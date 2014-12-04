@@ -1,6 +1,6 @@
 class Todo < ActiveRecord::Base
-	belongs_to :user
-	validates :user, presence: true
+	belongs_to :list
+	validates :list, presence: true
 	validates :description, presence: true, allow_blank: false
 
 	MAX_LIFETIME_IN_DAYS = 7

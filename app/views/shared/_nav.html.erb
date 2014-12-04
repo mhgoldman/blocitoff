@@ -1,25 +1,43 @@
-<ul class="nav nav-tabs">
-	<%= nav_link 'Blocitoff', root_path, a_class: 'navbar-brand' %>
-	
-	<% if user_signed_in? %>
-		<li><%= nav_link 'My TODOs', todos_path %></li>
-	<% end %>
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>        
+      </button>
+      <%= link_to 'Blocitoff', root_path, class: 'navbar-brand' %>
+    </div>
 
-	<%= nav_link 'About', welcome_about_path %>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">       
+        <% if user_signed_in? %>
+          <li><%= nav_link 'My Lists', lists_path %></li>
+        <% end %>
 
-	<% if user_signed_in? %>
-		<li class="navbar-right dropdown">
-			<%= link_to '#', "class" => "dropdown-toggle", "data-toggle" => "dropdown", "aria-expanded" => "false" do %>
-			  <%= current_user.email %> <span class="caret"/>
-			<% end %>
+        <%= nav_link 'About', welcome_about_path %>
+      </ul>
 
-			<ul class="dropdown-menu">
-				<%= nav_link "My Account", edit_user_registration_path %>
-				<%= nav_link "Log Out", destroy_user_session_path, method: :delete %>
-			</ul>
-		</li>
-	<% else %>
-		<%= nav_link 'Log In', new_user_session_path, li_class: 'navbar-right' %>
-		<%= nav_link 'Sign Up', new_user_registration_path, li_class: 'navbar-right' %>
-	<% end %>
-</ul>
+      <ul class="nav navbar-nav navbar-right">
+        <% if user_signed_in? %>
+          <li class="dropdown">
+            <%= link_to '#', "class" => "dropdown-toggle", "data-toggle" => "dropdown", "aria-expanded" => "false" do %>
+              <%= current_user.email %> <span class="caret"/>
+            <% end %>
+
+            <ul class="dropdown-menu">
+              <%= nav_link "My Account", edit_user_registration_path %>
+              <%= nav_link "Log Out", destroy_user_session_path, method: :delete %>
+            </ul>
+          </li>
+        <% else %>
+          <%= nav_link 'Log In', new_user_session_path, li_class: 'navbar-right' %>
+          <%= nav_link 'Sign Up', new_user_registration_path, li_class: 'navbar-right' %>
+        <% end %>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
