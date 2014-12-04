@@ -1,6 +1,6 @@
 <%= form_for [@list, todo], remote: true, authenticity_token: true do |form| %>
-<div class="form-group">
-	<%= form.text_field :description, placeholder: 'New TODO', id: 'new-todo-description', autofocus: true %>
-	<%= form.submit 'Save', class: "btn btn-default" %>
-</div>
+	<div class="field form-group">
+		<%= form.text_field :description, placeholder: 'New TODO', autofocus: true %>
+		<%= form.submit 'Save', class: "btn btn-default" %>
+	</div>
 <% end %>

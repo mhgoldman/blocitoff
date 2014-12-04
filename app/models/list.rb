@@ -1,5 +1,6 @@
 class List < ActiveRecord::Base
 	AVAIL_PERMISSIONS = ['open', 'viewable', 'private']
+	DEFAULT_PERMISSION = 'private'
 	
 	has_many :todos, dependent: :destroy
 	belongs_to :user

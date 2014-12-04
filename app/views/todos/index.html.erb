@@ -1,14 +1,4 @@
 <h2><%= @list.name %></h2>
-<div id="errors-div">
 <%= render 'shared/errors', obj: @todo %>		
-</div>
-<div id="todos-div">
-<% if @list.todos.reload.any? %>
-		<%= render 'todos_list' %>
-<% else %>
-		<%= render 'blank_todos_list' %>
-<% end %>
-</div>
-<div id="todo-form">
-	<%= render 'form', todo: @todo %>
-</div>
+<%= render 'todos_list' %>
+<%= render 'form', todo: @todo %>

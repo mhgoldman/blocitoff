@@ -3,22 +3,25 @@ class TodosController < ApplicationController
 	respond_to :html, :js
 	
 	def new
-		@todo = @list.todos.new
+		@todo = Todo.new
 	end
 
 	def create
 		@todo = @list.todos.new(todo_params)
-		@todos = @list.todos #needed to render index (html)
 
 		if @todo.save
-			@new_todo = @list.todos.new
+			@todo_for_form = Todo.new
 			flash[:notice] = 'Your new TODO was saved'
 			respond_with(@todo) do |format|
 				format.html { redirect_to list_todos_path(@list) }
 			end
 		else
+			@todo_for_form = @todo
 			respond_with(@todo) do |format|
-				format.html { render 'index' }
+				format.html { 
+					@todos = @list.todos
+					render 'index' 
+				}
 			end
 		end
 	end
@@ -31,7 +34,6 @@ class TodosController < ApplicationController
 		@todo = @list.todos.find(params[:id])
 		@todo.destroy
 		
-		@new_todo = @list.todos.new
 		flash[:notice] = 'Your TODO was deleted'
 		respond_with(@todo) do |format|
 			format.html { redirect_to list_todos_path(@list) }
@@ -39,7 +41,7 @@ class TodosController < ApplicationController
 	end
 
 	def index
-		@todo = @list.todos.new
+		@todo = Todo.new
 		@todos = @list.todos
 	end
 	

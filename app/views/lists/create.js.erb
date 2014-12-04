@@ -1,17 +1,13 @@
 <% unless @list.new_record? %>
-	if ($('#lists-table').length) 
-	{
-		$('#lists-table tr:last').after("<%= escape_javascript(render 'lists_list_row', list: @list) %>");		
-	}
-	else
-	{
-		$('#lists-div').html("<%= escape_javascript(render 'lists_list') %>");
-	}
+	$('#no_lists_msg').hide();
+	$('#lists_table').show();
+	$('#lists_table tr:last').after("<%= escape_javascript(render 'lists_list_row', list: @list) %>");
+
+	$('#list_name').val('');
+	$('#list_permissions').val('<%= List::DEFAULT_PERMISSION %>'); 
 <% end %>
 
-
-$('#list-form').html("<%= escape_javascript(render 'form', list: (@list.new_record? ? @list : @new_list)) %>");
-
-$('#new-list-name').focus();
+$('#new_list').html("<%= escape_javascript(render 'form', list: @list_for_form) %>");
+$('#list_name').focus();
 
 <%= render 'shared/toasts', obj: @list %>

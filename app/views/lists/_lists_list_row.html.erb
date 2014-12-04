@@ -1,5 +1,5 @@
 <% unless list.new_record? %>
-		<tr class='list-list-row' id='list-<%= list.id %>'>
+		<tr class='list-list-row' id='list_<%= list.id %>'>
 			<td><%= link_to list.name, list_todos_path(list) %></td>
 			<td><%= list.permissions %></td>
 			<td>

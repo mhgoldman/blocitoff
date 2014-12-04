@@ -1,17 +1,16 @@
 remove_todo = function(row_id) { 
 	$(row_id).remove();
 
-	if ($('#todos-table .todo-list-row').length === 0)
+	if ($('#todos_table .todo-list-row').length === 0)
 	{
-		$('#todos-div').html("<%= escape_javascript(render 'blank_todos_list') %>"); 		
+		$('#no_todos_msg').show();
+		$('#todos_table').hide();
 	}
 }
 
 <% if @todo.destroyed? %>
-  row_id = '#todo-<%= @todo.id %>';
+  row_id = '#todo_<%= @todo.id %>';
 	$(row_id).fadeOut(400, remove_todo(row_id));
 <% end %>
-
-$('#todo-form').html("<%= escape_javascript(render 'form', todo: @new_todo) %>");
 
 <%= render 'shared/toasts', obj: @todo %>

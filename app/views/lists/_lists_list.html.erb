@@ -1,4 +1,5 @@
-<table class="table" id="lists-table">
+<p id="no_lists_msg"<%= ' style="display: none;"'.html_safe if @lists.any? %>>There are no lists.</p>
+<table class="table" id="lists_table" <%= ' style="display: none;"'.html_safe unless @lists.any? %>>
 			<thead>
 				<tr>
 					<th>Name</th>

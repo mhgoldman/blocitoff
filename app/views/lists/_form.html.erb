@@ -1,9 +1,8 @@
 <%= form_for list, remote: true, authenticity_token: true do |form| %>
-<h2>New List</h2>
-<div class="form-group">
+	<h2>New List</h2>
 	<div class="field form-group">
 		<%= form.label :name %><br/>
-		<%= form.text_field :name, placeholder: 'Name', id: 'new-list-name', autofocus: true %>
+		<%= form.text_field :name, placeholder: 'Name', autofocus: true %>
 	</div>
 	<div class="field form-group">
 		<%= form.label :permissions %></br>	
@@ -12,5 +11,4 @@
 	<div class="field form-group">
 		<%= form.submit 'Save', class: "btn btn-default" %>
 	</div>
-</div>
 <% end %>

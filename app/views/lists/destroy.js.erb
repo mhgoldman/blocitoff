@@ -1,18 +1,16 @@
 remove_list = function(row_id) { 
 	$(row_id).remove();
 
-	if ($('#lists-table .list-list-row').length === 0)
+	if ($('#lists_table .list-list-row').length === 0)
 	{
-		$('#lists-div').html("<%= escape_javascript(render 'blank_lists_list') %>"); 		
+		$('#no_lists_msg').show();
+		$('#lists_table').hide();
 	}
 }
 
-
 <% if @list.destroyed? %>
-  row_id = '#list-<%= @list.id %>';
+  row_id = '#list_<%= @list.id %>';
 	$(row_id).fadeOut(400, remove_list(row_id));
 <% end %>
-
-$('#list-form').html("<%= escape_javascript(render 'form', list: @new_list) %>");
 
 <%= render 'shared/toasts', obj: @list %>
