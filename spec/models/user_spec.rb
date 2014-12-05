@@ -10,7 +10,7 @@ RSpec.describe User, :type => :model do
 	end
 
 	it "shouldn't validate with mismatched passwords" do
-		u = User.new(email: "foo@bar.com", password: "foo", password_confirmation: "bar")
+		u = User.new(email: "foo@bar.com", password: "foobarbaz", password_confirmation: "bazbarfoo")
 		expect(u).to_not be_valid
 	end
 

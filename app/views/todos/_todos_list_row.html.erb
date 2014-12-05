@@ -4,7 +4,7 @@
 			<td><%= todo.days_left %></td>
 			<td>
 				<%= form_tag([@list, todo], method: :delete, authenticity_token: true, remote: true, class: 'complete-task-form') do %>
-					<%= check_box_tag 'completed', 1, false, class: 'complete-task-chk' %> 
+					<%= check_box_tag 'completed', 1, false, class: 'complete-task-chk', id: "completed_todo_#{todo.id}" %> 
 					<%= submit_tag 'complete', class: 'complete-task-btn' %>
 				<% end %>
 			</td>

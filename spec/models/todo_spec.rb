@@ -7,21 +7,16 @@ RSpec.describe Todo, type: :model do
 	it { should_not allow_value('').for(:description) }
 
   it "should have correct days_left" do
-  	u = User.new(email: "some@email.com")
-  	u.skip_confirmation!
-  	u.save
+  	t = create(:todo, created_at: Time.zone.now)
 
-    l = List.create(name: 'my todo list', user: u)
-
-  	t = l.todos.create(description: "a thing to do")
-  	expect(t.days_left).to be 7
+  	expect(t.days_left).to eq 7
 
   	t.created_at = 6.days.ago
   	t.save
-  	expect(t.days_left).to be 1
+  	expect(t.days_left).to eq 1
 
   	t.created_at = 7.days.ago
   	t.save
-  	expect(t.days_left).to be 0
+  	expect(t.days_left).to eq 0
 	end
 end
