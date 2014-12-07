@@ -3,22 +3,24 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #editable_title {
-	#title {
+	margin-bottom: 10px;
+
+	.list-name {
 		display: inline;
 		padding-right: 10px;
 		cursor: pointer;
 	}
 
-	#edit_link {
-	padding-left: 10px;
-	vertical-align: super; 
+	.edit-link {
+		padding-left: 10px;
+		vertical-align: super; 
 	}
 
-	#edit_link a:hover, a:visited, a:link, a:active {
+	.edit-link a:hover, a:visited, a:link, a:active {
 		text-decoration: none;
 	}
 
-	#permission {
+	.permissions {
 		display: inline;
 		color: rgb(102,102,102); 
 		background-color: rgb(221,221,221); 
@@ -26,14 +28,6 @@
 		padding-right: 10px; 
 		padding-left: 10px;
 		cursor: pointer;
-
-		.editable-click {
-			border-bottom: none;
-		}
-	}
-
-	#permission:hover {
-		border-bottom: dashed 1px black;
 	}
 
 	.editable-click {
@@ -46,6 +40,5 @@
 
 	.popover.bottom > .arrow:after {
 			border-bottom-color: rgba(0, 0, 0, 0.2);
-	}
+	}	
 }
-

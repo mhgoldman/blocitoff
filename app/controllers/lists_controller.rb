@@ -62,9 +62,8 @@ class ListsController < ApplicationController
 		@lists = current_user.lists
 	end
 	
-
 	def xeditable? object = nil
-  	true # Or something like current_user.xeditable?
+  	true
 	end
 
 	private

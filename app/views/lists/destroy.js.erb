@@ -1,16 +1,14 @@
-remove_list = function(row_id) { 
-	$(row_id).remove();
-
-	if ($('#lists_table .list-list-row').length === 0)
-	{
-		$('#no_lists_msg').show();
-		$('#lists_table').hide();
-	}
-}
-
 <% if @list.destroyed? %>
   row_id = '#list_<%= @list.id %>';
-	$(row_id).fadeOut(400, remove_list(row_id));
+	$(row_id).fadeOut(400, function() {
+		$(row_id).remove();
+
+		if ($('#lists_table .list-list-row').length === 0)
+		{
+			$('#no_lists_msg').show();
+			$('#lists_table').hide();
+		}				
+	});
 <% end %>
 
 <%= render 'shared/toasts', obj: @list %>

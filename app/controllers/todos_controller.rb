@@ -1,6 +1,7 @@
 class TodosController < ApplicationController
 	before_action :authenticate_user!, :set_list
 	respond_to :html, :js
+  helper_method :xeditable?
 
 	def create
 		@todo = @list.todos.new(todo_params)
@@ -14,10 +15,7 @@ class TodosController < ApplicationController
 		else
 			@todo_for_form = @todo
 			respond_with(@todo) do |format|
-				format.html { 
-					@todos = @list.todos
-					render 'index' 
-				}
+				format.html { render 'lists/show' and return }
 			end
 		end
 	end
@@ -36,6 +34,10 @@ class TodosController < ApplicationController
 		end
 	end
 	
+	def xeditable? object = nil
+  	true
+	end
+
 	private
 
 	def todo_params
