@@ -1,4 +1,4 @@
 <h2><%= @list.name %></h2>
 <%= render 'shared/errors', obj: @todo %>		
-<%= render 'todos_list' %>
+<%= render 'todos_list', todos: @todos %>
 <%= render 'form', todo: @todo %>

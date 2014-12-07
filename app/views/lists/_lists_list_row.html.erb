@@ -1,9 +1,11 @@
 <% unless list.new_record? %>
 		<tr class='list-list-row' id='list_<%= list.id %>'>
-			<td><%= link_to list.name, list_todos_path(list) %></td>
+			<td><%= link_to list.name, list %></td>
 			<td><%= list.permissions %></td>
 			<td>
-				<%= button_to('destroy', list, method: :delete, authenticity_token: true, remote: true, id: "destroy_list_#{list.id}") %>
+				<%= button_to(list, method: :delete, authenticity_token: true, remote: true, id: "destroy_list_#{list.id}", class: "btn btn-danger") do %>
+					<%= glyph(:trash) %>
+				<% end %>
 			</td>
 		</tr>
 <% end %>

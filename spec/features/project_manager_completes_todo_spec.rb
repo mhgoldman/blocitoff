@@ -13,7 +13,7 @@ feature 'Project manager completes TODO' do
 	scenario 'Successfully' do
 		login_as(@todo.list.user)
 
-		visit list_todos_path(@todo.list)
+		visit list_path(@todo.list)
 		check "completed_todo_#{@todo.id}"
 		click_button 'complete'
 		expect(page).to have_content('Your TODO was deleted')

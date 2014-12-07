@@ -14,14 +14,14 @@ feature 'Project manager views TODO' do
 	scenario 'Successfully' do
 		login_as(@list.user, scope: :user)	
 
-		visit list_todos_path(@list)
+		visit list_path(@list)
 		@todos.each do |todo|
 			expect(page).to have_content(todo.description)
 		end
 	end
 
 	scenario 'Without being logged in' do
-		visit list_todos_path(@list)
+		visit list_path(@list)
 		expect(page).to have_content("You need to sign in")		
 	end
 end

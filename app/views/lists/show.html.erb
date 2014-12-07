@@ -1,0 +1,10 @@
+<div id='editable_title'>
+	<h2 id='title'><%= editable @list, :name %></h2>
+	<span id='permission'><%= editable @list, :permissions, type: :select, source: List::AVAIL_PERMISSIONS  %></span>
+	<noscript><%= link_to glyph(:pencil) + ' Edit', edit_list_path(@list), id: 'edit_link' %></noscript>
+
+</div>
+
+<%= render 'shared/errors', obj: @list %>		
+<%= render 'todos/todos_list', todos: @list.todos %>
+<%= render 'todos/form', todo: @todo %>

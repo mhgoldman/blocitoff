@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :lists do
-    resources :todos
+    resources :todos, only: [:create, :destroy]
   end
 
   devise_for :users

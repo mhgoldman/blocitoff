@@ -1,5 +1,7 @@
 toastr.options.positionClass = "toast-bottom-right";
 
+<% full_errors = false if full_errors.nil? %>
+
 <% if flash[:notice] %>
 	toastr.info("<%= escape_javascript(flash.discard[:notice]) %>");
 <% end %>
@@ -7,5 +9,9 @@ toastr.options.positionClass = "toast-bottom-right";
 	toastr.error("<%= escape_javascript(flash.discard[:alert]) %>");
 <% end %>
 <% if obj.errors.any? %>
-	toastr.error("Your changes could not be saved due to <%= escape_javascript(obj.errors.count.to_s + ' error'.pluralize(obj.errors.count)) %>");
+	<% if full_errors %>
+		toastr.error("Your changes could not be saved: <%= escape_javascript(obj.errors.full_messages.to_sentence) %>");
+	<% else %>
+		toastr.error("Your changes could not be saved due to <%= escape_javascript(obj.errors.count.to_s + ' error'.pluralize(obj.errors.count)) %>");
+	<% end %>
 <% end %>

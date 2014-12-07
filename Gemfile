@@ -71,3 +71,5 @@ gem 'bootstrap-sass', '~> 3.1.1'
 gem 'toastr-rails'
 
 gem 'jquery-turbolinks'
+
+gem 'x-editable-rails'

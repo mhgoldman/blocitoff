@@ -1,5 +1,5 @@
-<p id="no_todos_msg"<%= ' style="display: none;"'.html_safe if @todos.any? %>>There are no TODOs.</p>
-<table class="table" id="todos_table" <%= ' style="display: none;"'.html_safe unless @todos.any? %>>
+<p id="no_todos_msg"<%= ' style="display: none;"'.html_safe if todos.any? %>>There are no TODOs.</p>
+<table class="table" id="todos_table" <%= ' style="display: none;"'.html_safe unless todos.any? %>>
 	<thead>
 		<tr>
 			<th>Description</th>
@@ -7,5 +7,5 @@
 			<th></th>
 		</tr>
 	</thead>
-	<%= render collection: @todos, partial: 'todos_list_row', as: :todo %>
+	<%= render collection: todos, partial: 'todos/todos_list_row', as: :todo %>
 </table>

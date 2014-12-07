@@ -16,4 +16,5 @@
 //= require bootstrap
 //= require_tree .
 //= require toastr
-
+//= require editable/bootstrap-editable
+//= require editable/rails

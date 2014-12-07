@@ -11,21 +11,6 @@ RSpec.describe TodosController, :type => :controller do
 		@other_user = @other_list.user
 	end
 
-	describe 'GET index' do	
-		it "lists own todos if logged in" do
-			sign_in(@user)
-
-			get :index, list_id: @list.id
-	    expect(response).to render_template :index			
-			expect(assigns(:todos)).to eq ([@todo])		
-		end
-
-		it "redirects if not logged in" do
-			get :index, list_id: @list.id
-			expect(response).to redirect_to(new_user_session_path)
-		end
-	end
-
 	describe 'DELETE todo' do
 		it "doesn't allow deletion when not signed in" do
       delete :destroy, id: @todo.to_param, completed: 1, list_id: @list.id

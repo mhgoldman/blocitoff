@@ -1,10 +1,6 @@
 class TodosController < ApplicationController
 	before_action :authenticate_user!, :set_list
 	respond_to :html, :js
-	
-	def new
-		@todo = Todo.new
-	end
 
 	def create
 		@todo = @list.todos.new(todo_params)
@@ -13,7 +9,7 @@ class TodosController < ApplicationController
 			@todo_for_form = Todo.new
 			flash[:notice] = 'Your new TODO was saved'
 			respond_with(@todo) do |format|
-				format.html { redirect_to list_todos_path(@list) }
+				format.html { redirect_to @list }
 			end
 		else
 			@todo_for_form = @todo
@@ -28,7 +24,7 @@ class TodosController < ApplicationController
 
 	def destroy
 		unless params[:completed] == "1"
-			redirect_to list_todos_path(@list) and return
+			redirect_to @list and return
 		end
 
 		@todo = @list.todos.find(params[:id])
@@ -36,13 +32,8 @@ class TodosController < ApplicationController
 		
 		flash[:notice] = 'Your TODO was deleted'
 		respond_with(@todo) do |format|
-			format.html { redirect_to list_todos_path(@list) }
+			format.html { redirect_to @list }
 		end
-	end
-
-	def index
-		@todo = Todo.new
-		@todos = @list.todos
 	end
 	
 	private

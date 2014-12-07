@@ -15,7 +15,7 @@ feature 'Project manager creates TODO' do
 	scenario 'Successfully' do
 		login_as(@list.user, scope: :user)
 
-		visit list_todos_path(@list)
+		visit list_path(@list)
 		fill_in 'todo_description', with: 'Meet up with the team'
 		click_button 'Save'
 		expect(page).to have_content('Your new TODO was saved')
@@ -25,13 +25,13 @@ feature 'Project manager creates TODO' do
 	scenario 'With description missing' do
 		login_as(@list.user, scope: :user)
 
-		visit list_todos_path(@list)
+		visit list_path(@list)
 		click_button 'Save'
 		expect(page).to have_content("can't be blank")
 	end
 
 	scenario 'Without being logged in' do
-		visit list_todos_path(@list)
+		visit list_path(@list)
 		expect(page).to have_content("You need to sign in")		
 	end
 end
