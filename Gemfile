@@ -56,6 +56,7 @@ group :test do
 	gem 'email_spec'
 	gem 'database_cleaner'
 	gem 'factory_girl_rails', '~> 4.0'
+	gem 'poltergeist'
 end
 
 gem 'devise', '~> 3.4.1'

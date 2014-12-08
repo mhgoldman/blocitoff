@@ -6,8 +6,12 @@ require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'capybara/rails'
 require 'capybara/rspec'
+require "capybara/poltergeist"
 require 'shoulda/matchers'
 
+# Specs flagged with `js: true` will use Capybara's JS driver. Set
+# that JS driver to :poltergeist
+Capybara.javascript_driver = :poltergeist
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -35,7 +39,8 @@ RSpec.configure do |config|
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
-  # config.use_transactional_fixtures = true
+  # Changed to false as part of poltergeist config
+  config.use_transactional_fixtures = false
 
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and
@@ -52,11 +57,6 @@ RSpec.configure do |config|
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
 
-   # Make Factory Girl's methods avilable
   config.include FactoryGirl::Syntax::Methods
-
-  # Make Devise's test helpers available
-  RSpec.configure do |config|
-    config.include Devise::TestHelpers, type: :controller
-  end
+  config.include Devise::TestHelpers, type: :controller  
 end

@@ -11,17 +11,21 @@ feature 'Project manager views lists' do
 		Warden.test_reset! 
 	end
 
-	scenario 'Successfully' do
-		login_as(@user, scope: :user)	
+	[true,false].each do |use_ajax|
+		feature "With#{use_ajax ? '' : 'out'} ajax", js: use_ajax do
+			scenario 'Successfully' do
+				login_as(@user, scope: :user)	
 
-		visit lists_path
-		@lists.each do |list|
-			expect(page).to have_content(list.name)
+				visit lists_path
+				@lists.each do |list|
+					expect(page).to have_content(list.name)
+				end
+			end
+
+			scenario 'Without being logged in' do
+				visit lists_path
+				expect(page).to have_content("You need to sign in")		
+			end
 		end
-	end
-
-	scenario 'Without being logged in' do
-		visit lists_path
-		expect(page).to have_content("You need to sign in")		
 	end
 end

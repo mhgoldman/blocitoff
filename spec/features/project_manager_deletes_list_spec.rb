@@ -10,11 +10,15 @@ feature 'Project manager deletes list' do
 		Warden.test_reset! 
 	end
 
-	scenario 'Successfully' do
-		login_as(@list.user)
+	[true,false].each do |use_ajax|
+		feature "With#{use_ajax ? '' : 'out'} ajax", js: use_ajax do
+			scenario 'Successfully' do
+				login_as(@list.user)
 
-		visit lists_path
-		click_button "destroy_list_#{@list.id}"
-		expect(page).to have_content('Your list was deleted')
+				visit lists_path
+				click_button "destroy_list_#{@list.id}"
+				expect(page).to have_content('Your list was deleted')
+			end
+		end
 	end
 end
