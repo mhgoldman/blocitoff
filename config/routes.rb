@@ -1,9 +1,16 @@
 Rails.application.routes.draw do
+
+  devise_for :users
+
   resources :lists do
     resources :todos, only: [:create, :destroy]
   end
 
-  devise_for :users
+  namespace :api do
+    resources :lists do
+      resources :todos, only: [:create, :destroy]
+    end    
+  end
 
   root 'welcome#index'
 

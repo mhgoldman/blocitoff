@@ -74,3 +74,7 @@ gem 'toastr-rails'
 gem 'jquery-turbolinks'
 
 gem 'x-editable-rails'
+
+gem 'active_model_serializers', '~> 0.8.0'
+
+gem 'simple_token_authentication', '~> 1.0'

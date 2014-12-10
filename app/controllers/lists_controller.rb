@@ -18,11 +18,11 @@ class ListsController < ApplicationController
 	def update
 		if @list.update(list_params)
 			flash[:notice] = 'Your list was updated'
-			respond_with(@todo) do |format|
+			respond_with(@list) do |format|
 				format.html { redirect_to lists_path }
 			end
 		else
-			respond_with(@todo) do |format|
+			respond_with(@list) do |format|
 				format.html { render 'edit' }
 			end
 		end
@@ -34,7 +34,7 @@ class ListsController < ApplicationController
 		if @list.save
 			@list_for_form = List.new
 			flash[:notice] = 'Your new list was saved'
-			respond_with(@todo) do |format|
+			respond_with(@list) do |format|
 				format.html { redirect_to lists_path }
 			end
 		else
