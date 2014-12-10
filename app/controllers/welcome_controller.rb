@@ -1,5 +1,6 @@
 class WelcomeController < ApplicationController
 	before_filter :redirect_to_lists_page, only: :index
+
 	def index
 	end
 

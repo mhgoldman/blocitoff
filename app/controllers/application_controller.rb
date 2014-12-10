@@ -5,4 +5,12 @@ class ApplicationController < ActionController::Base
 
   acts_as_token_authentication_handler_for User, fallback_to_devise: false
 
+  include Pundit
+
+	after_action :verify_authorized, except: :index, unless: :exclude_from_verification?
+	after_action :verify_policy_scoped, only: :index, unless: :exclude_from_verification?
+
+	def exclude_from_verification?
+		devise_controller? || params[:controller] == 'welcome'
+	end
 end

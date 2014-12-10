@@ -1,47 +1,49 @@
 class Api::ListsController < Api::ApiController  
 	before_filter :ensure_logged_in, only: [:create, :update, :destroy]
+	before_action :set_list, only: [:update, :destroy, :show]
 
 	def index
-		lists = List.visible_to(current_user)
+		lists = policy_scope(List)
 		respond_with lists
 	end
 
 	def show
-		list = List.visible_to(current_user).find(params[:id])
-		respond_with list
+		respond_with @list
 	end
 
 	def create		
-		list = current_user.lists.new(list_params)
+		@list = current_user.lists.new(list_params)
+		authorize @list
 
-		if list.save
-			respond_with list
+		if @list.save
+			respond_with @list
 		else
-			error :unprocessable_entity, list.errors.full_messages
+			error :unprocessable_entity, @list.errors.full_messages
 		end
 	end
 
 	def update
-		list = List.editable_by(current_user).find(params[:id])
-
-		if list.update(list_params)
-			respond_with list
+		if @list.update(list_params)
+			respond_with @list
 		else
-			error :unprocessable_entity, list.errors.full_messages
+			error :unprocessable_entity, @list.errors.full_messages
 		end
 	end
 
 	def destroy
-		list = List.editable_by(current_user).find(params[:id])
-
-		if list.destroy
-			respond_with list
+		if @list.destroy
+			respond_with @list
 		else
-			error :unprocessable_entity, list.errors.full_messages
+			error :unprocessable_entity, @list.errors.full_messages
 		end
 	end		
 
 	private
+
+	def set_list
+		@list = policy_scope(List).find(params[:id])
+		authorize @list
+	end
 
 	def list_params
 		params.require(:list).permit(:name, :permissions)

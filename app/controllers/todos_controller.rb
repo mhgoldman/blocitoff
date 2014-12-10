@@ -5,6 +5,7 @@ class TodosController < ApplicationController
 
 	def create
 		@todo = @list.todos.new(todo_params)
+		authorize @todo
 
 		if @todo.save
 			@todo_for_form = Todo.new
@@ -21,11 +22,13 @@ class TodosController < ApplicationController
 	end
 
 	def destroy
+		@todo = @list.todos.find(params[:id])
+		authorize @todo
+
 		unless params[:completed] == "1"
 			redirect_to @list and return
 		end
 
-		@todo = @list.todos.find(params[:id])
 		@todo.destroy
 		
 		flash[:notice] = 'Your TODO was deleted'
@@ -45,6 +48,6 @@ class TodosController < ApplicationController
 	end
 
 	def set_list
-		@list = current_user.lists.find(params[:list_id])
+		@list = policy_scope(List).find(params[:list_id])
 	end
 end

@@ -4,10 +4,6 @@ class ListsController < ApplicationController
 	respond_to :html, :js
   helper_method :xeditable?
 
-	def new
-		@list = List.new
-	end
-
 	def edit
 	end
 
@@ -30,6 +26,7 @@ class ListsController < ApplicationController
 
 	def create
 		@list = current_user.lists.new(list_params)
+		authorize @list		
 
 		if @list.save
 			@list_for_form = List.new
@@ -59,7 +56,7 @@ class ListsController < ApplicationController
 
 	def index
 		@list = List.new
-		@lists = current_user.lists
+		@lists = policy_scope(List) #TODO!!! This means you'll see other users' lists on your page!!!!!
 	end
 	
 	def xeditable? object = nil
@@ -73,6 +70,7 @@ class ListsController < ApplicationController
 	end	
 
 	def set_list
-		@list = current_user.lists.find(params[:id])
+		@list = policy_scope(List).find(params[:id])
+		authorize @list
 	end
 end

@@ -1,32 +1,37 @@
 class Api::TodosController < Api::ApiController
 	respond_to :json
+	before_action :set_list
 
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found_error	
 	before_filter :ensure_logged_in	
 
 	def create
-		list = List.editable_by(current_user).find(params[:list_id])
-		todo = list.todos.new(todo_params)
+		todo = @list.todos.new(todo_params)
+		authorize todo
 
 		if todo.save
-			respond_with list, todo
+			respond_with @list, todo
 		else
-			error :unprocessable_entity, list.errors.full_messages
+			error :unprocessable_entity, todo.errors.full_messages
 		end
 	end
 
 	def destroy
-		list = List.editable_by(current_user).find(params[:list_id])
-		todo = list.todos.find(params[:id])
-
+		todo = @list.todos.find(params[:id])
+		authorize todo
+		
 		if todo.destroy
 			respond_with todo
 		else
-			error :unprocessable_entity, list.errors.full_messages
+			error :unprocessable_entity, todo.errors.full_messages
 		end
 	end
 
 	private
+
+	def set_list
+		@list = policy_scope(List).find(params[:list_id])
+	end
 
 	def todo_params
 		params.require(:todo).permit(:description)
