@@ -2,14 +2,12 @@ class Api::ApiController < ApplicationController
 	skip_before_action :verify_authenticity_token
 	
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found_error	
+  rescue_from Pundit::NotAuthorizedError, with: :permission_denied_error
 
   respond_to :json 
 
   private
 
-  # Error responses and before_filter blocking work differently with Javascript requests.
-  # Rather than using before_filters to authenticate actions, we suggest using
-  # "guard clauses" like `permission_denied_error unless condition`
   def permission_denied_error
     error :forbidden, 'Permission denied'
   end

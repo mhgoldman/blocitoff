@@ -17,10 +17,9 @@ class TodoPolicy < ApplicationPolicy
 	class Scope < Scope
 		def resolve
 			if user
-				#TODO I'm fairly certain this couldn't possibly work. This is a scope on TODOs, when the actual scope needs to depend on lists......
-				scope.where("permissions IN ('open','viewable') OR user_id = ?", user.id)
+				scope.includes(:lists).where("permissions IN ('open','viewable') OR user_id = ?", user.id)
 			else
-				scope.where("permissions IN ('open','viewable')")
+				scope.includes(:lists).where("permissions IN ('open','viewable')")
 			end
 		end
 	end

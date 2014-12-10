@@ -1,9 +1,7 @@
 class Api::TodosController < Api::ApiController
 	respond_to :json
 	before_action :set_list
-
-  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found_error	
-	before_filter :ensure_logged_in	
+	before_action :ensure_logged_in	
 
 	def create
 		todo = @list.todos.new(todo_params)

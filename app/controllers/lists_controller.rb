@@ -15,7 +15,7 @@ class ListsController < ApplicationController
 		if @list.update(list_params)
 			flash[:notice] = 'Your list was updated'
 			respond_with(@list) do |format|
-				format.html { redirect_to lists_path }
+				format.html { redirect_to @list }
 			end
 		else
 			respond_with(@list) do |format|
@@ -56,7 +56,7 @@ class ListsController < ApplicationController
 
 	def index
 		@list = List.new
-		@lists = policy_scope(List) #TODO!!! This means you'll see other users' lists on your page!!!!!
+		@lists = policy_scope(List).where(user: current_user)
 	end
 	
 	def xeditable? object = nil

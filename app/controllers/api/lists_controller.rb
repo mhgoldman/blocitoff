@@ -1,5 +1,5 @@
 class Api::ListsController < Api::ApiController  
-	before_filter :ensure_logged_in, only: [:create, :update, :destroy]
+	before_action :ensure_logged_in, only: [:create, :update, :destroy]
 	before_action :set_list, only: [:update, :destroy, :show]
 
 	def index

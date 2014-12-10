@@ -30,7 +30,6 @@ class ListPolicy < ApplicationPolicy
 		true
 	end
 
-	#TODO NOT DRY
 	class Scope < Scope
 		def resolve
 			if user
