@@ -84,8 +84,8 @@ $(document).on("page:change", function() {
 			var apiEmail = $("meta[name=api_email]").attr('content');
 			var apiToken = $("meta[name=api_token]").attr('content');
 
-			list_id = $(this).closest('tr').attr('data-list-id');
-			row_element_id = '#' + $(this).closest('tr').attr('id');
+			var list_id = $(this).closest('tr').attr('data-list-id');
+			var row_element_id = '#' + $(this).closest('tr').attr('id');
 
 			var ajaxOptions = {
 				type: "DELETE", url: "/api/lists/" + list_id, dataType: "json", contentType: "application/json; charset=utf-8",

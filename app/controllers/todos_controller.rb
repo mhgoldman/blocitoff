@@ -1,6 +1,6 @@
 class TodosController < ApplicationController
 	before_action :authenticate_user!, :set_list
-	respond_to :html, :js
+	respond_to :html
   helper_method :xeditable?
 
 	def create
