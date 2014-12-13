@@ -8,6 +8,6 @@
 		<%= form.select :permissions, List::AVAIL_PERMISSIONS %><br/>
 	</div>
 	<div class="field form-group">
-		<%= form.submit 'Save', class: "btn btn-default" %>
+		<%= form.submit 'Save', class: "btn btn-default", data: { create_list_button: true } %>
 	</div>
 <% end %>

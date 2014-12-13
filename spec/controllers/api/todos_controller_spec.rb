@@ -1,7 +1,5 @@
 require 'rails_helper'
 
-#TODO missing POST
-
 RSpec.describe Api::TodosController, :type => :controller do
 	before do
 		@user = create(:user)
@@ -27,7 +25,7 @@ RSpec.describe Api::TodosController, :type => :controller do
 			post :create, list_id: list.id, todo: { description: "a new todo" }, format: :json
 
 			if should_succeed
-				expect(response.code).to eq "201"
+				expect(response).to have_http_status :created
 				expect(list.todos.count).to eq 4
 			else
 				expect(["403","404"].include?(response.code))
@@ -73,7 +71,7 @@ RSpec.describe Api::TodosController, :type => :controller do
 			delete :destroy, list_id: @list.id, id: @list.todos.first.id, format: :json
 
 			if should_succeed
-				expect(response.code).to eq "204"
+				expect(response).to have_http_status :no_content
 				expect(list.todos.count).to eq 2
 			else
 				expect(["403","404"].include?(response.code))

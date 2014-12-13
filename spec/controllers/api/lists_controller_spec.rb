@@ -1,7 +1,5 @@
 require 'rails_helper'
 
-#TODO Missing PUT and POST
-
 RSpec.describe Api::ListsController, :type => :controller do
 before do
 		@list = create(:list)
@@ -19,36 +17,36 @@ before do
 
 			get :index, format: :json
 
-			json = JSON(response.body)
-			expect(json["lists"].count).to eq 3
+			json = JSON.parse(response.body, symbolize_names: true)
+			expect(json[:lists].count).to eq 3
 
-			expect(json["lists"][0]['owner_email']).to eq @user.email
-			expect(json["lists"][0]['permissions']).to eq 'private'
+			expect(json[:lists][0][:owner_email]).to eq @user.email
+			expect(json[:lists][0][:permissions]).to eq 'private'
 
-			expect(json["lists"][1]['owner_email']).to eq @other_user.email
-			expect(json["lists"][1]['permissions']).to eq 'open'
+			expect(json[:lists][1][:owner_email]).to eq @other_user.email
+			expect(json[:lists][1][:permissions]).to eq 'open'
 
-			expect(json["lists"][2]['owner_email']).to eq @other_user.email
-			expect(json["lists"][2]['permissions']).to eq 'viewable'
+			expect(json[:lists][2][:owner_email]).to eq @other_user.email
+			expect(json[:lists][2][:permissions]).to eq 'viewable'
 		end
 
 		it "lists open/viewable lists if not logged in" do
 			get :index, format: :json
-			json = JSON(response.body)
-			expect(json["lists"].count).to eq 2
+			json = JSON.parse(response.body, symbolize_names: true)
+			expect(json[:lists].count).to eq 2
 
-			expect(json["lists"][0]['owner_email']).to eq @other_user.email
-			expect(json["lists"][0]['permissions']).to eq 'open'
+			expect(json[:lists][0][:owner_email]).to eq @other_user.email
+			expect(json[:lists][0][:permissions]).to eq 'open'
 
-			expect(json["lists"][1]['owner_email']).to eq @other_user.email
-			expect(json["lists"][1]['permissions']).to eq 'viewable'
+			expect(json[:lists][1][:owner_email]).to eq @other_user.email
+			expect(json[:lists][1][:permissions]).to eq 'viewable'
 		end
 	end
 
 	describe 'DELETE list' do
 		it "doesn't allow deletion when not signed in" do
       delete :destroy, id: @list.id, format: :json
-      expect(response.code).to eq "403"
+      expect(response).to have_http_status :forbidden
 		end
 
 		it "allows deletion of own list" do
@@ -63,14 +61,14 @@ before do
 			sign_in(@user)
 
       delete :destroy, id: @other_list_open.id, format: :json
-      expect(response.code).to eq "204"
+      expect(response).to have_http_status :no_content
 		end
 
 		it "doesn't allow deletion of other user's viewable list" do
 			sign_in(@user)
 
       delete :destroy, id: @other_list_viewable.id, format: :json
-      expect(response.code).to eq "403"
+      expect(response).to have_http_status :forbidden
 		end
 	end
 
@@ -82,7 +80,7 @@ before do
 			post :create, list: { name: 'new list' }, format: :json
 
 			if should_succeed
-				expect(response.code).to eq "201"
+				expect(response).to have_http_status :created
 				expect(@user.lists.count).to eq 2
 			else
 				expect(["403","404"].include?(response.code))
@@ -107,7 +105,7 @@ before do
 			put :update, id: list.id, list: { name: 'changed name' }, format: :json
 
 			if should_succeed
-				expect(response.code).to eq "204"
+				expect(response).to have_http_status :no_content
 				expect(list.reload.name).to eq 'changed name'
 			else
 				expect(["403","404"].include?(response.code))
