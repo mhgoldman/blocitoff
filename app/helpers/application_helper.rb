@@ -18,4 +18,10 @@ module ApplicationHelper
   def glyph(*names)
     content_tag :i, nil, :class => names.map{|name| "glyphicon glyphicon-#{name.to_s.gsub('_','-')}" }
   end
+
+  def api_meta_tags
+  	if user_signed_in?
+	  	"<meta content='#{current_user.email}' name='api_email' /><meta content='#{current_user.authentication_token}' name='api_token' />".html_safe
+	  end
+  end
 end

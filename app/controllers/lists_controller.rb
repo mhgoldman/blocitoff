@@ -1,7 +1,7 @@
 class ListsController < ApplicationController
 	before_action :authenticate_user!
 	before_action :set_list, only: [:edit, :update, :destroy, :show]
-	respond_to :html, :js
+	respond_to :html
   helper_method :xeditable?
 
 	def edit

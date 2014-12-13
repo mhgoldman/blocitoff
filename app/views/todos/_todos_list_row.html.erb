@@ -1,10 +1,10 @@
 <% unless todo.new_record? %>
-		<tr class='todo-list-row' id="todo_<%= todo.id %>">
+		<tr class='todo-list-row' id="todo_<%= todo.id %>" data-todo-id="<%= todo.id %>" >
 			<td><%= todo.description %></td>
 			<td><%= todo.days_left %></td>
 			<td>
 				<%= form_tag([@list, todo], method: :delete, authenticity_token: true, remote: true, class: 'complete-task-form') do %>
-					<%= check_box_tag 'completed', 1, false, class: 'complete-task-chk', id: "completed_todo_#{todo.id}" %> 
+					<%= check_box_tag 'completed', 1, false, class: 'complete-task-chk', id: "completed_todo_#{todo.id}", data: { destroy_todo_checkbox: true } %> 
 					<%= submit_tag 'complete', class: 'complete-task-btn' %>
 				<% end %>
 			</td>
