@@ -1,9 +1,12 @@
 $(document).on("page:change", function() {
 	$('.editable').editable({
-		placement: 'bottom',
-		ajaxOptions: {
-			dataType: 'script'
-		}
+		mode: 'inline',
+		success: function(response, newValue) {
+	    toastr.info('Your list was updated');
+		},
+		error: function(response, newValue) {
+			toastr.error('Error! ' + jQuery.parseJSON(response.responseText).errors);
+    }
 	});
 });
 
