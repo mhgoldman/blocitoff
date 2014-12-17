@@ -49,7 +49,6 @@ $(document).on("page:change", function() {
 
 			function showErrorNotification(ex) {
 	  		toastr.error("Error! " + jQuery.parseJSON(ex.responseText).errors);				
-	  		$("#lists_table tbody tr:last-child").remove();
 			}
 
 
@@ -59,7 +58,11 @@ $(document).on("page:change", function() {
 			$.ajax(ajaxOptions);
 		};
 
-		$(document).on("click", "[data-create-list-button]", createList);
+		$(document).off("click", "[data-create-list-button]");
+
+		if (document.location.pathname.match("^/lists/?$")) {
+			$(document).on("click", "[data-create-list-button]", createList);
+		}
 	};
 
 	$(document).on("page:change", setupCreateHandlers);
@@ -102,7 +105,11 @@ $(document).on("page:change", function() {
 			$.ajax(ajaxOptions);
 		};
 
-		$(document).on("click", "[data-destroy-list-button]", deleteList);
+		$(document).off("click", "[data-destroy-list-button]");
+
+		if (document.location.pathname.match("^/lists/?$")) {
+			$(document).on("click", "[data-destroy-list-button]", deleteList);
+		}
 	};
 
 	$(document).on("page:change", setupDeleteHandlers);

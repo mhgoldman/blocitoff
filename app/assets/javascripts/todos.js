@@ -53,7 +53,6 @@ $(document).on("page:change", function() {
 
 			function showErrorNotification(ex) {
 	  		toastr.error("Error! " + jQuery.parseJSON(ex.responseText).errors);				
-	  		$("#todos_table tbody tr:last-child").remove();
 			}
 
 			var extraOptions = { type: "POST", url: "/api/lists/" + list_id + "/todos", data: jsonStr, success: showSuccessNotification, error: showErrorNotification };
@@ -62,11 +61,14 @@ $(document).on("page:change", function() {
 			$.ajax(ajaxOptions);
 		};
 
-		$(document).on("click", "[data-create-todo-button]", createTodo);
+		$(document).off("click", "[data-create-todo-button]");
+
+		if (document.location.pathname.match("^/lists/[0-9]+")) {
+			$(document).on("click", "[data-create-todo-button]", createTodo);			
+		}
 	};
 
 	$(document).on("page:change", setupCreateHandlers);
-
 })();
 
 (function() {
@@ -107,9 +109,12 @@ $(document).on("page:change", function() {
 			$.ajax(ajaxOptions);
 		};
 
-		$(document).on("click", "[data-destroy-todo-checkbox]", deleteTodo);
+		$(document).off("click", "[data-destroy-todo-checkbox]");
+
+		if (document.location.pathname.match("^/lists/[0-9]+")) {
+			$(document).on("click", "[data-destroy-todo-checkbox]", deleteTodo);
+		}
 	};
 
 	$(document).on("page:change", setupDeleteHandlers);
-
 })();
