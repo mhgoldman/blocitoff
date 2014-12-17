@@ -23,12 +23,6 @@ $(document).on("page:change", function() {
 
 			var jsonStr = JSON.stringify({ "todo": { "description": description } });
 
-			var ajaxOptions = {
-				type: "POST", url: "/api/lists/" + list_id + "/todos", dataType: "json", contentType: "application/json; charset=utf-8",
-				headers: { "X-User-Email": apiEmail, "X-User-Token": apiToken },
-				data: jsonStr
-			};
-
 			function showSuccessNotification(data) {
 	  		toastr.info("Your new TODO was saved");
 
@@ -62,8 +56,8 @@ $(document).on("page:change", function() {
 	  		$("#todos_table tbody tr:last-child").remove();
 			}
 
-			ajaxOptions.success = showSuccessNotification;
-			ajaxOptions.error = showErrorNotification;
+			var extraOptions = { type: "POST", url: "/api/lists/" + list_id + "/todos", data: jsonStr, success: showSuccessNotification, error: showErrorNotification };
+			var ajaxOptions = blocitoff.api.buildOptions(extraOptions);
 
 			$.ajax(ajaxOptions);
 		};
@@ -89,11 +83,6 @@ $(document).on("page:change", function() {
 
 			var list_id = window.location.pathname.split('/')[2];
 
-			var ajaxOptions = {
-				type: "DELETE", url: "/api/lists/" + list_id + "/todos/" + todo_id, dataType: "json", contentType: "application/json; charset=utf-8",
-				headers: { "X-User-Email": apiEmail, "X-User-Token": apiToken }
-			};
-
 			function showSuccessNotification(data) {
 		  	toastr.info("Your TODO was deleted");
 				
@@ -112,9 +101,8 @@ $(document).on("page:change", function() {
 		  	toastr.error("Error! " + jQuery.parseJSON(ex.responseText).errors);
 			}
 
-			ajaxOptions.success = showSuccessNotification;
-			ajaxOptions.error = showErrorNotification;
-
+			var extraOptions = {	type: "DELETE", url: "/api/lists/" + list_id + "/todos/" + todo_id, success: showSuccessNotification, error: showErrorNotification };
+			var ajaxOptions = blocitoff.api.buildOptions(extraOptions);
 
 			$.ajax(ajaxOptions);
 		};

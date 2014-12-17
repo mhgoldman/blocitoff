@@ -16,9 +16,6 @@ $(document).on("page:change", function() {
 		function createList(event) {
 			event.preventDefault();
 
-			var apiEmail = $("meta[name=api_email]").attr('content');
-			var apiToken = $("meta[name=api_token]").attr('content');
-
 			var nameField = $("#list_name");
 			var name = nameField.val();
 
@@ -26,12 +23,6 @@ $(document).on("page:change", function() {
 			var perms = permsField.val();
 
 			var jsonStr = JSON.stringify({ "list": { "name": name, "permissions": perms } });
-
-			var ajaxOptions = {
-				type: "POST", url: "/api/lists", dataType: "json", contentType: "application/json; charset=utf-8",
-				headers: { "X-User-Email": apiEmail, "X-User-Token": apiToken },
-				data: jsonStr
-			};
 
 			function showSuccessNotification(data) {
 	  		toastr.info("Your new list was saved");
@@ -61,9 +52,9 @@ $(document).on("page:change", function() {
 	  		$("#lists_table tbody tr:last-child").remove();
 			}
 
-			ajaxOptions.success = showSuccessNotification;
-			ajaxOptions.error = showErrorNotification;
 
+			var extraOptions = { type: "POST", url: "/api/lists", data: jsonStr, success: showSuccessNotification, error: showErrorNotification }; 
+			var ajaxOptions = blocitoff.api.buildOptions(extraOptions);
 
 			$.ajax(ajaxOptions);
 		};
@@ -87,11 +78,6 @@ $(document).on("page:change", function() {
 			var list_id = $(this).closest('tr').attr('data-list-id');
 			var row_element_id = '#' + $(this).closest('tr').attr('id');
 
-			var ajaxOptions = {
-				type: "DELETE", url: "/api/lists/" + list_id, dataType: "json", contentType: "application/json; charset=utf-8",
-				headers: { "X-User-Email": apiEmail, "X-User-Token": apiToken }
-			};
-
 			function showSuccessNotification(data) {
 		  	toastr.info("Your list was deleted");
 				
@@ -110,9 +96,8 @@ $(document).on("page:change", function() {
 		  	toastr.error("Error! " + jQuery.parseJSON(ex.responseText).errors);
 			}
 
-			ajaxOptions.success = showSuccessNotification;
-			ajaxOptions.error = showErrorNotification;
-
+			var extraOptions = { type: "DELETE", url: "/api/lists/" + list_id, success: showSuccessNotification, error: showErrorNotification };
+			var ajaxOptions = blocitoff.api.buildOptions(extraOptions);
 
 			$.ajax(ajaxOptions);
 		};
