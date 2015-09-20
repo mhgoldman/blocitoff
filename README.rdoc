@@ -4,6 +4,7 @@
 
 To run, after cloning this repo:
 
+* <tt>bundle</tt>
 * <tt>rake db:create</tt>
 * <tt>rake db:migrate</tt>
 * Update <tt>config/application.yml</tt> with SendGrid details for emails to work
