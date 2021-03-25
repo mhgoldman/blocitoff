@@ -1,4 +1,4 @@
-== Blocitoff
+== Welcome to Blocitoff
 
 "Exploding" to-do list app built in Ruby on Rails as part of the Bloc Full-Stack Program.
 
